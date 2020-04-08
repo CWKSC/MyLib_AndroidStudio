@@ -1,5 +1,7 @@
 package com.example.individualproject.CommonClass;
 
+import androidx.annotation.Nullable;
+
 public class MyPhysics {
 
 
@@ -11,27 +13,13 @@ public class MyPhysics {
     }
 
 
-    public enum Find {
-        F, m, a
-    }
-    public static float F_ma(Find find, float p1, float p2){
-        float F, m, a;
-        switch (find) {
-            case F:
-                m = p1;
-                a = p2;
-                return m * a;
-            case m:
-                F = p1;
-                a = p2;
-                return F / a;
-            case a:
-                F = p1;
-                m = p2;
-                return F / m;
-            default:
-                throw new IllegalStateException("Unexpected value: " + find);
-        }
+
+
+    public static Float F_ma(Float F, Float m, Float a){
+        return F == null ? m * a :
+               m == null ? F / a :
+               a == null ? F / m :
+               null;
     }
 
 }

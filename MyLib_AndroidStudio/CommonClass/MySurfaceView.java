@@ -1,8 +1,6 @@
 package com.example.individualproject.CommonClass;
 
 import android.content.Context;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 

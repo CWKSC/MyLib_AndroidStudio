@@ -5,7 +5,7 @@ import android.view.MotionEvent;
 
 import com.example.individualproject.CommonClass.MySystem;
 
-public class OnTouchManager extends Manager<OnTouchObject> {
+public class OnTouchManager extends Manager<IOnTouchable> {
 
     public static MotionEvent event;
     public static boolean onTouch = false;
@@ -35,7 +35,7 @@ public class OnTouchManager extends Manager<OnTouchObject> {
         // Down //
         if(action == MotionEvent.ACTION_DOWN){
             for (int i = 0; i < list.size(); i++) {
-                OnTouchObject onTouchObject = list.get(i);
+                IOnTouchable onTouchObject = list.get(i);
                 onTouchObject.OnTouchDown(deltaTime);
                 onTouchObject.OnTouchDownAndMove(deltaTime);
             }

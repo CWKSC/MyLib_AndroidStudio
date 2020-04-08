@@ -12,21 +12,29 @@ public class LoopingThreadManager {
     }
 
     public void DestoryAll() {
+        int size = loopingThreadList.size();
+        boolean retry = true;
         try {
-            for (LoopingThread loopingThread : loopingThreadList) {
-                loopingThread.running = false;
+            for (int i = 0; i < size; i++) {
+                loopingThreadList.get(i).running = false;
             }
-            for (LoopingThread loopingThread : loopingThreadList) {
-                loopingThread.join();
+            for (int i = 0; i < size; i++) {
+                retry = true;
+                while (retry) {
+                    loopingThreadList.get(i).join();
+                    retry = false;
+                }
             }
+            loopingThreadList.clear();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
     public void StartAll() {
-        for (LoopingThread loopingThread : loopingThreadList) {
-            loopingThread.start();
+        int size = loopingThreadList.size();
+        for (int i = 0; i < size; i++) {
+            loopingThreadList.get(i).start();
         }
     }
 

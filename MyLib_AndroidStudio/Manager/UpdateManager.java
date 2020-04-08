@@ -4,7 +4,9 @@ import android.content.Context;
 
 import com.example.individualproject.CommonClass.MySystem;
 
-public class UpdateManager extends Manager<UpdateObject> {
+import java.util.Collection;
+
+public class UpdateManager extends Manager<IUpdatable> {
 
     public UpdateManager(Context context) {
         super(context);
@@ -17,7 +19,8 @@ public class UpdateManager extends Manager<UpdateObject> {
     public void ThreadStart() {
         previousTime = MySystem.secondTime();
 
-        for (int i = 0; i < list.size(); i++) {
+        int size = list.size();
+        for (int i = 0; i < size; i++) {
             list.get(i).Start();
         }
     }
@@ -27,8 +30,16 @@ public class UpdateManager extends Manager<UpdateObject> {
         deltaTime = MySystem.secondTime() - previousTime;
         previousTime = MySystem.secondTime();
 
-        for (int i = 0; i < list.size(); i++) {
-            list.get(i).Update(deltaTime);
+        synchronized (list) {
+            for (int i = 0; i < list.size(); i++) {
+                IUpdatable updatable = list.get(i);
+                if(updatable != null) { // Defensive programming
+                    updatable.Update(deltaTime);
+                }
+            }
         }
     }
+
+
+
 }

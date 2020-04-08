@@ -46,4 +46,9 @@ public class MyMath {
         return (float) ((Math.sqrt(n) + 1) / 2f);
     }
 
+
+    public static float Lerp(float start, float stop, float amount) {
+        return (1 - amount) * start + amount * stop;
+    }
+
 }

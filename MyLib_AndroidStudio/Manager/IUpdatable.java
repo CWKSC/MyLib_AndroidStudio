@@ -1,6 +1,6 @@
 package com.example.individualproject.Manager;
 
-public interface UpdateObject {
+public interface IUpdatable {
     void Start();
     void Update(double deltaTime);
 }

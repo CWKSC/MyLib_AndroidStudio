@@ -2,10 +2,8 @@ package com.example.individualproject.CommonClass;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.os.Build;
 import android.util.DisplayMetrics;
@@ -13,11 +11,6 @@ import android.view.View;
 import android.view.WindowManager;
 
 import androidx.annotation.RequiresApi;
-
-import com.example.individualproject.GamePanel;
-
-
-import com.example.individualproject.R;
 
 public class MyUI {
 
@@ -93,5 +86,29 @@ public class MyUI {
                 (y >= rect.top && y <= rect.bottom);
     }
 
+
+    public static Bitmap replaceColor(Bitmap src, int fromColor, int targetColor) {
+        // https://stackoverflow.com/a/55204374/11693034
+        if(src == null) {  return null;  }
+
+        // Source image size //
+        int width = src.getWidth();
+        int height = src.getHeight();
+        int[] pixels = new int[width * height];
+
+        // Get pixels
+        src.getPixels(pixels, 0, width, 0, 0, width, height);
+
+        // Change color //
+        for(int x = 0; x < pixels.length; ++x) {
+            pixels[x] = (pixels[x] == fromColor) ? targetColor : pixels[x];
+        }
+
+        // Create result bitmap output and Set pixels //
+        Bitmap result = Bitmap.createBitmap(width, height, src.getConfig());
+        result.setPixels(pixels, 0, width, 0, 0, width, height);
+
+        return result;
+    }
 
 }

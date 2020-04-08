@@ -20,7 +20,7 @@ public class MyOrientationSensor implements SensorEventListener {
 
     public float[] values = new float[3];
 
-    MyOrientationSensor(Context context){
+    public MyOrientationSensor(Context context){
         this.context = context;
         sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         assert sensorManager != null;
@@ -47,7 +47,9 @@ public class MyOrientationSensor implements SensorEventListener {
                 break;
         }
         updateOrientation();
-        Log.i("","z: " + values[0] + "\tx: " + values[1] + "\ty: " + values[2]);
+
+        // Debug //
+        //Log.i("","z: " + values[0] + "\tx: " + values[1] + "\ty: " + values[2]);
     }
 
     private  void updateOrientation() {
@@ -55,14 +57,16 @@ public class MyOrientationSensor implements SensorEventListener {
         SensorManager.getRotationMatrix(R, null, accelerometerValues, magneticFieldValues);
         SensorManager.getOrientation(R, values);
 
-        values[0] = (float) Math.toDegrees(values[0]);
-        values[1] = (float) Math.toDegrees(values[1]);
-        values[2] = (float) Math.toDegrees(values[2]);
+        // https://developer.android.com/guide/topics/sensors/sensors_position#sensors-pos-orient
+        values[0] = (float) Math.toDegrees(values[0]); // Azimuth (degrees of rotation about the -z axis)
+        values[1] = (float) Math.toDegrees(values[1]); // Pitch (degrees of rotation about the x axis)
+        values[2] = (float) Math.toDegrees(values[2]); // Roll (degrees of rotation about the y axis)
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-        Log.i("", "onAccuracyChanged()");
+        // Debug //
+        //Log.i("", "onAccuracyChanged()");
     }
 
 }

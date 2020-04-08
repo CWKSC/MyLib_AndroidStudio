@@ -26,6 +26,7 @@ public class Vector2 {
     }
 
     // Assign //
+    /** return this */
     public Vector2 Assign(Vector2 vector2){
         x = vector2.x;
         y = vector2.y;
@@ -38,11 +39,13 @@ public class Vector2 {
     public static Vector2 Add(Vector2 a, Vector2 b) {
         return new Vector2(a.x + b.x, a.y + b.y);
     }
+    /** return this */
     public Vector2 Add(Vector2 add){
         x += add.x;
         y += add.y;
         return this;
     }
+    /** return this */
     public Vector2 Add(float x, float y){
         this.x += x;
         this.y += y;
@@ -56,11 +59,13 @@ public class Vector2 {
     public static Vector2 Sub(Vector2 a, Vector2 b) {
         return new Vector2(a.x - b.x, a.y - b.y);
     }
+    /** return this */
     public Vector2 Sub(Vector2 add){
         x -= add.x;
         y -= add.y;
         return this;
     }
+    /** return this */
     public Vector2 Sub(float x, float y){
         this.x -= x;
         this.y -= y;
@@ -74,6 +79,7 @@ public class Vector2 {
     public static Vector2 MultScalar(Vector2 a, float scalar){
         return new Vector2(a.x * scalar, a.y * scalar);
     }
+    /** return this */
     public Vector2 MultScalar(float scalar){
         x *= scalar;
         y *= scalar;
@@ -87,6 +93,7 @@ public class Vector2 {
     public static Vector2 DivideScalar(Vector2 a, float scalar){
         return new Vector2(a.x / scalar, a.y / scalar);
     }
+    /** return this */
     public Vector2 DivideScalar(float scalar){
         x /= scalar;
         y /= scalar;
@@ -105,6 +112,13 @@ public class Vector2 {
     public Vector2 GetUnitVector(){
         float length = Length();
         return new Vector2(x / length, y / length);
+    }
+    /** return this */
+    public Vector2 ToUnitVector(){
+        float length = Length();
+        x /= length;
+        y /= length;
+        return this;
     }
 
 
@@ -140,6 +154,7 @@ public class Vector2 {
     }
 
 
+    /** return new Vector2 */
     public static Vector2 AToB(Vector2 a, Vector2 b) {
         return Sub(b, a);
     }
